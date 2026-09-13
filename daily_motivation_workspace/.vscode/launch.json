@@ -1,0 +1,31 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "daily_motivation_workspace",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "daily_motivation_api",
+            "cwd": "daily_motivation_api",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "daily_motivation_cli",
+            "cwd": "daily_motivation_cli",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "terminal_colors",
+            "cwd": "terminal_colors",
+            "request": "launch",
+            "type": "dart"
+        }
+    ]
+}

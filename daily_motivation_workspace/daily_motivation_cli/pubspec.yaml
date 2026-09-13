@@ -1,0 +1,19 @@
+﻿name: daily_motivation_cli
+description: Interactive Daily Motivation Terminal CLI.
+version: 1.0.0
+publish_to: none
+resolution: workspace
+
+environment:
+  sdk: '^3.8.1'
+
+dependencies:
+  http: ^1.2.0
+  logging: ^1.2.0
+  terminal_colors:
+    workspace: true
+  daily_motivation_api:
+    workspace: true
+
+dev_dependencies:
+  lints: ^6.0.0

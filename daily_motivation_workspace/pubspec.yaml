@@ -1,0 +1,12 @@
+﻿name: daily_motivation_workspace
+
+environment:
+  sdk: '^3.8.1'
+
+workspace:
+  - terminal_colors
+  - daily_motivation_api
+  - daily_motivation_cli
+
+dev_dependencies:
+  lints: ^6.0.0
