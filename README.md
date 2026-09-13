@@ -238,7 +238,7 @@ https://github.com/trishaamondina16@gmail.com-rgb/daily_motivation_workspace
 
 ## Developer
 
-**Trisha Gail P. Amondina**
+**Trisha Gail P. Amondina
 
 BSIT 3
 Palawan State University – Taytay Campus
