@@ -1,254 +1,140 @@
-# Daily Motivation Workspace
+[README.md](https://github.com/user-attachments/files/32882887/README.md)
+# Daily Motivation Terminal
 
-A Dart-based command-line application that retrieves and displays daily motivational messages using a REST API.
+An interactive command-line app, written in Dart, that fetches random motivational quotes from the [ZenQuotes](https://zenquotes.io) API and shows them in a colorized terminal prompt.
 
-## Project Description
+```
+========================================
+      DAILY MOTIVATION TERMINAL
+========================================
+Type "help" to see available commands.
+Type "motivate" to receive motivation.
+Type "exit" to close the application.
 
-The **Daily Motivation Workspace** is a command-line application developed using Dart. It connects to a motivational API to retrieve motivational messages and presents the content through a simple command-line interface.
+daily-motivation > motivate
 
-The project demonstrates API integration, JSON data processing, object-oriented programming, command-line interaction, error handling, logging, terminal styling, and automated testing.
+========================================
+        DAILY MOTIVATION
+========================================
 
-## Objectives
+"Keep moving forward."
 
-The project aims to:
+— Test Author
 
-1. Retrieve motivational messages from a REST API.
-2. Process and convert JSON responses into Dart objects.
-3. Provide a command-line interface for retrieving daily motivation.
-4. Implement error handling for network and API-related problems.
-5. Use terminal colors to improve the command-line interface.
-6. Implement logging for application activities and errors.
-7. Organize the application using a Dart workspace with multiple packages.
-8. Implement automated tests for the project components.
+Quote ID: 1756190000000
+========================================
+```
 
 ## Features
 
-* Retrieve daily motivational messages from an API.
-* Display motivational quotes and messages.
-* Support command-line interaction.
-* Handle API and network errors.
-* Use terminal colors for improved output.
-* Record application errors through logging.
-* Convert API JSON data into Dart models.
-* Include automated tests.
+- Fetch a random motivational quote with one command
+- Colorized output (headers, quotes, authors, errors) using ANSI escape codes
+- Friendly error messages for network failures, timeouts and bad responses
+- Clean shutdown that closes the HTTP client
+- Built-in logging for easier debugging
 
-## Technologies Used
+## Commands
 
-* **Dart**
-* **REST API**
-* **HTTP**
-* **JSON**
-* **Dart Testing Framework**
-* **ANSI Terminal Colors**
-* **Git**
-* **GitHub**
+| Command    | Description                              |
+|------------|------------------------------------------|
+| `motivate` | Fetch and display a motivational quote   |
+| `help`     | Show the list of available commands      |
+| `exit`     | Close the application (Ctrl+D also works) |
+
+Unknown commands print a red error message and suggest typing `help`.
 
 ## Project Structure
 
-```text
+This repository is a Dart [pub workspace](https://dart.dev/tools/pub/workspaces) made up of three packages:
+
+```
 daily_motivation_workspace/
-│
-├── terminal_colors/
-│   ├── lib/
-│   │   ├── src/
-│   │   │   ├── ansi.dart
-│   │   │   └── terminal_colors_base.dart
-│   │   ├── terminal_colors.dart
-│   │   └── ...
-│   ├── test/
-│   └── pubspec.yaml
-│
-├── daily_motivation_api/
-│   ├── lib/
-│   │   ├── src/
-│   │   │   ├── client.dart
-│   │   │   ├── exceptions.dart
-│   │   │   ├── models.dart
-│   │   │   └── daily_motivation_api_base.dart
-│   │   ├── daily_motivation_api.dart
-│   │   └── ...
-│   ├── test/
-│   ├── example/
-│   └── pubspec.yaml
-│
-├── daily_motivation_cli/
-│   ├── bin/
-│   │   ├── main.dart
-│   │   └── daily_motivation_cli.dart
-│   ├── lib/
-│   │   ├── src/
-│   │   │   ├── motivation_command.dart
-│   │   │   ├── command_base.dart
-│   │   │   ├── help_command.dart
-│   │   │   ├── logging_config.dart
-│   │   │   └── quote_command.dart
-│   │   └── daily_motivation_cli.dart
-│   ├── test/
-│   └── pubspec.yaml
-│
-├── pubspec.yaml
-├── pubspec.lock
-└── .gitignore
+├── pubspec.yaml               # Workspace definition
+├── terminal_colors/           # ANSI color formatting library
+├── daily_motivation_api/      # Async API client + models + exceptions
+└── daily_motivation_cli/      # Interactive terminal application
 ```
 
-## Package Description
-
-### terminal_colors
-
-The `terminal_colors` package provides reusable terminal styling and ANSI color constants for the command-line interface.
-
-### daily_motivation_api
-
-The `daily_motivation_api` package handles communication with the motivational REST API. It also contains the motivational data models, API client, and exception handling.
-
-### daily_motivation_cli
-
-The `daily_motivation_cli` package provides the command-line interface of the application. It handles user commands, motivational queries, help commands, logging, and formatted output.
+| Package                | Purpose |
+|------------------------|---------|
+| `terminal_colors`      | `TerminalColor` enum and a `String` extension with `.styleHeader`, `.styleSuccess`, `.styleWarning`, `.styleError` and `.color()` |
+| `daily_motivation_api` | `DailyMotivationApiClient`, the `Motivation` model and `DailyMotivationException` |
+| `daily_motivation_cli` | The REPL loop, the `CliCommand` base class, `MotivationCommand`, `HelpCommand` and logging setup |
 
 ## Requirements
 
-Before running the project, make sure the following are installed:
+- [Dart SDK](https://dart.dev/get-dart) 3.8.1 or newer
+- An internet connection (quotes are fetched live)
 
-* Dart SDK 3.8.1 or later
-* Git
-* Internet connection
-
-## Installation
-
-Clone the repository:
+## Getting Started
 
 ```bash
-git clone https://github.com/lacsoncherryrose-byte/daily_motivation_workspace.git
-```
-
-Navigate to the project directory:
-
-```bash
+# 1. Clone the repository and enter the workspace
 cd daily_motivation_workspace
-```
 
-Get the project dependencies:
-
-```bash
+# 2. Install dependencies for all packages
 dart pub get
+
+# 3. Run the app
+dart run daily_motivation_cli
 ```
 
-## How to Run
-
-Navigate to the CLI package:
+## Running Tests
 
 ```bash
-cd daily_motivation_cli
-```
-
-Run the application:
-
-```bash
-dart run
-```
-
-## Example Usage
-
-The application can be used to retrieve motivational messages through the command-line interface.
-
-Example command:
-
-```text
-daily_motivation > motivate
-```
-
-Example output:
-
-```text
-[INFO] Retrieving daily motivation...
-
-"Believe in yourself and keep moving forward!"
-
-Have a great and productive day!
-```
-
-The motivational message is retrieved from the API and displayed through the command-line interface.
-
-## API
-
-This project uses a **REST API** to retrieve motivational content.
-
-The API response may contain information such as:
-
-* Motivational message
-* Quote
-* Author
-* Content ID
-
-The application processes the JSON response and converts the relevant information into Dart objects before displaying it in the command-line interface.
-
-## Error Handling
-
-The application implements error handling for possible problems such as:
-
-* Network connection failures
-* API request failures
-* Invalid API responses
-* Invalid motivational data
-* Timeout errors
-
-Exceptions are handled using Dart exception-handling mechanisms.
-
-## Logging
-
-The CLI package includes logging functionality for recording application events and errors.
-
-Logging helps identify problems during application execution and makes troubleshooting easier.
-
-## Testing
-
-The project contains automated tests for the application components.
-
-To run the tests, use:
-
-```bash
+cd daily_motivation_api
 dart test
 ```
 
-The tests verify important functionality of the API and command-line components.
+The current tests cover `Motivation.fromJson` for valid and malformed input.
 
-## Screenshots
+## How It Works
 
-Screenshots of the application can be added to this section to demonstrate the actual output and functionality.
+1. `bin/main.dart` starts a read-eval-print loop and reads a line from stdin.
+2. The first word is matched against the registered `CliCommand` objects.
+3. `MotivationCommand` calls `DailyMotivationApiClient.fetchMotivation()`.
+4. The client sends a `GET` request to `https://zenquotes.io/api/random` (10-second timeout), validates the JSON, and returns a `Motivation`.
+5. Any failure is wrapped in a `DailyMotivationException`, which the command prints as a readable error.
 
-### Daily Motivation Command
+## Adding a New Command
 
-Add a screenshot of the motivation command here.
+1. Create a class that extends `CliCommand` in `daily_motivation_cli/lib/src/commands.dart`:
 
-### Motivation Results
+   ```dart
+   class AboutCommand extends CliCommand {
+     AboutCommand() : super('about', 'Shows information about the app.');
 
-Add a screenshot showing the motivational message returned by the application.
+     @override
+     Future<void> execute(
+       DailyMotivationApiClient client,
+       List<String> arguments,
+     ) async {
+       print('Daily Motivation Terminal v1.0.0'.styleHeader);
+     }
+   }
+   ```
 
-### Test Results
+2. Register it in the `commands` list in `bin/main.dart`:
 
-Add a screenshot showing the successful test execution.
+   ```dart
+   final commands = <CliCommand>[MotivationCommand(), HelpCommand(), AboutCommand()];
+   ```
 
-## GitHub Repository
+3. Add a line for it in `HelpCommand`.
 
-The source code and project documentation are available in the repository:
+## Known Issues / To Do
 
-**Daily Motivation Workspace**
+- `Motivation.fromJson` expects `_id`, `content` and `author` fields, while the live client reads ZenQuotes' `q` and `a` fields. Align the two or remove one.
+- Remove the leftover template `Awesome` classes in `terminal_colors_base.dart` and `daily_motivation_api_base.dart`.
+- `bin/main.dart` and `bin/daily_motivation_cli.dart` are duplicates; keep only one.
+- Add tests for the CLI and `terminal_colors` packages.
+- Lower the log level (currently `Level.ALL`) so log lines don't clutter normal output.
+- Add `.dart_tool/` to `.gitignore` at the workspace root.
 
-https://github.com/trishaamondina16@gmail.com-rgb/daily_motivation_workspace
+## Credits
 
-## Developer
+Quotes are provided by [ZenQuotes.io](https://zenquotes.io). Please review their terms and attribution requirements before publishing or distributing this app.
 
-**Trisha Gail P. Amondina
+## License
 
-BSIT 3
-Palawan State University – Taytay Campus
-
-## Course
-
-**IT7/L – System Integration and Architecture 1**
-
-## Conclusion
-
-The **Daily Motivation Workspace** demonstrates how Dart can be used to build a modular command-line application that communicates with an external REST API. The project applies important software development concepts including API integration, JSON data processing, data modeling, error handling, logging, terminal styling, automated testing, and GitHub-based project management.
-
-Through this project, the developer gained practical experience in organizing a multi-package Dart workspace and integrating different components into one functional application. It also demonstrates how external services can be integrated into a software application to provide useful and engaging functionality for users.
+No license has been specified yet. Add one (for example MIT) before sharing the project publicly.
